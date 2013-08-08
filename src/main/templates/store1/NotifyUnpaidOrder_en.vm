@@ -1,0 +1,216 @@
+Unpaid Order Notification
+<html>
+	<head>
+		<title>KonaKart Newsletter</title>
+		<style type="text/css">
+			.font {font-family: Arial, Helvetica, Sans-Serif;}
+			.title{font-size: 160%;}
+			.dataCell { font-family: Arial, Helvetica, Sans-Serif; background-color: #E1E7F7 }
+			.title1{font-size: 120%;}
+			.option{font-size: 80%;}
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="http://www.konakart.com/images/kk_logo.jpg" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					Unpaid Order Notification
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Dear $obj1.get(0).getCustomerName(),
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					We'd like to remind you that the order(s) you placed some days ago have still not been paid for. Details are: 
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+						#foreach( $order in $obj1)
+
+							<table width="100%" border="0" cellspacing="0" cellpadding="2">
+								<colgroup>
+									<col width="20%"></col>
+									<col width="80%"></col>
+								</colgroup>
+								<tr>
+									<td colspan="2"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+								</tr>
+								<tr>
+									<td class="main"><b>Order Number:</b></td>
+									<td class="main">$order.getId()</td>
+								</tr>
+								<tr>
+									<td class="main"><b>Date Ordered:</b></td>
+									<td class="main">$dateTool.format('d-MMM-yyyy HH:mm:ss',$order.getDatePurchased(),$locale)</td>
+								</tr>
+							 </table>
+							 
+							<table width="100%" border="0" cellspacing="0" cellpadding="2">
+							  <tr>
+								<td colspan="3"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+							  </tr>
+							  <tr>
+								<td valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="2">
+										<tr>
+											<td class="main" valign="top"><b>Customer:</b></td>
+											<td class="main">$order.getCustomerFormattedAddress()</td>
+										</tr>
+										<tr>
+											<td colspan="2"><img src="${imageBaseUrl}/pixel_trans.gif" border="0" alt="" width="1" height="5"></td>
+										</tr>
+									</table>
+								</td>
+								<td valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="2">
+									<tr>
+										<td class="main" valign="top"><b>Shipping Address:</b></td>
+										<td class="main">$order.getDeliveryFormattedAddress()</td>
+									</tr>
+									</table>
+								</td>
+								<td valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="2">
+									<tr>
+										<td class="main" valign="top"><b>Billing Address:</b></td>
+										<td class="main">$order.getBillingFormattedAddress()</td>
+									</tr>
+									</table>
+								</td>
+							  </tr>
+							</table>
+					
+							<table width="100%" border="0" cellspacing="0" cellpadding="2">
+								<colgroup span="2">
+									<col width="20%"></col>
+									<col width="80%"></col>
+								</colgroup>
+							  <tr>
+								<td class="main"><b>Telephone Number:</b></td>
+								<td class="main">$order.getCustomerTelephone()</td>
+							  </tr>
+							  <tr>
+								<td class="main"><b>E-Mail Address:</b></td>
+								<td class="main"><a href="$order.getCustomerEmail()"><u>$order.getCustomerEmail()</u></a></td>
+							  </tr>
+							  <tr>
+								<td class="main"><b>Payment Method:</b></td>
+								<td class="main">$order.getPaymentMethod()</td>
+							  </tr>
+							  <tr>
+								<td colspan="3"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+							  </tr>
+							</table>
+					
+							<table border="0" width="100%" cellspacing="0" cellpadding="2">
+							  <tr class="dataTableHeadingRow">
+								<td class="dataTableHeadingContent" colspan="2">Products</td>
+								<td class="dataTableHeadingContent">Model</td>
+								<td class="dataTableHeadingContent" align="right">Tax</td>
+								<td class="dataTableHeadingContent" align="right">Price (ex)</td>
+								<td class="dataTableHeadingContent" align="right">Price (inc)</td>
+								<td class="dataTableHeadingContent" align="right">Total (ex)</td>
+								<td class="dataTableHeadingContent" align="right">Total (inc)</td>
+							  </tr>
+								#foreach( $op in $order.getOrderProducts() )
+									<tr>
+									<td class="dataTableContent" valign="top" align="right">$op.getQuantity()&nbsp;x</td>
+									<td class="dataTableContent" valign="top">$op.getName()
+									#foreach( $option in $op.getOpts() )
+										#if ( $option.getType() == 1 )
+											<br/><nobr><small>&nbsp;<i>-$option.getName(): $option.getQuantity() $option.getValue()</i></small></nobr>
+					    				#else
+											<br/><nobr><small>&nbsp;<i>-$option.getName(): $option.getValue()</i></small></nobr>
+					    				#end
+									#end
+									</td>
+									<td class="dataTableContent" valign="top">$op.getModel()</td>
+									<td class="dataTableContent" align="right" valign="top">$op.getTaxRate()%</td>
+									<td class="dataTableContent" align="right" valign="top"><b>$currencyMgr.formatPrice($op.getFinalPriceExTax(),$order.getCurrencyCode())</b></td>
+									<td class="dataTableContent" align="right" valign="top"><b>$currencyMgr.formatPrice($op.getFinalPriceIncTax(),$order.getCurrencyCode())</b></td>
+									<td class="dataTableContent" align="right" valign="top"><b>$currencyMgr.formatPrice($op.getTotalPriceExTax(),$order.getCurrencyCode())</b></td>
+									<td class="dataTableContent" align="right" valign="top"><b>$currencyMgr.formatPrice($op.getTotalPriceIncTax(),$order.getCurrencyCode())</b></td>
+									</tr>
+								#end
+							  <tr>
+								<td align="right" colspan="8">
+									<table border="0" cellspacing="0" cellpadding="2">
+										#foreach( $ot in $order.getOrderTotals() )
+										<tr>
+											<td align="right" class="dataTableContent">$ot.getTitle()</td>
+											<td align="right" class="dataTableContent">$ot.getText()</td>
+										</tr>
+										#end
+									</table>
+								</td>
+							  </tr>
+							</table>
+					
+						  <table border="1" cellspacing="0" cellpadding="5" width="100%">
+								<colgroup span="4">
+									<col width="20%"></col>
+									<col width="15%"></col>
+									<col width="15%"></col>
+									<col width="50%"></col>
+								</colgroup>
+								<tr class="dataTableHeadingRow">
+								<td class="dataTableHeadingContent" align="center"><b>Date Added</b></td>
+								<td class="dataTableHeadingContent" align="center"><b>Customer Notified</b></td>
+								<td class="dataTableHeadingContent" align="center"><b>Status</b></td>
+								<td class="dataTableHeadingContent" align="center"><b>Comments</b></td>
+							  </tr>
+							  #foreach( $osh in $order.getStatusTrail() )
+							  <tr>
+								<td class="dataTableContent" align="center">$dateTool.format('d-MMM-yyyy HH:mm:ss',$osh.getDateAdded(),$locale)</td>
+								#if ( $osh.isCustomerNotified() )
+									<td class="dataTableContent" align="center">Yes</td>
+								#else
+									<td class="dataTableContent" align="center">No</td>
+								#end
+								<td class="dataTableContent" align="center">$osh.getOrderStatus()</td>
+								#if ( $osh.getComments() )
+									<td class="dataTableContent">$osh.getComments()&nbsp;</td>
+								#else
+									<td class="dataTableContent">&nbsp;</td>
+								#end
+							  </tr>
+							  #end
+							</table>
+							<br/>
+							<br/>
+						#end
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					Please contact us if you require further information.
+				</td>
+			</tr>
+		</table>
+	</body> 
+</html> 
+

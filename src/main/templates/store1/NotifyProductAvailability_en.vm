@@ -1,0 +1,68 @@
+Product in stock notification
+<html>
+	<head>
+		<title>KonaKart Newsletter</title>
+		<style type="text/css">
+			.font {font-family: Arial, Helvetica, Sans-Serif;}
+			.title{font-size: 160%;}
+			.dataCell { font-family: Arial, Helvetica, Sans-Serif; background-color: #E1E7F7 }
+			.title1{font-size: 120%;}
+			.option{font-size: 80%;}
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="http://www.konakart.com/images/logo.png" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					 Product Availability Notification
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Dear $obj1.getCustomerName(),
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					We'd like to nofify you that we have received a delivery date for one or more of the products you recently ordered from our store. The products are: 
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					<ul>
+						#foreach( $op in $obj2)
+							<li>
+								$op.getName() - $op.getModel()  will be delivered on $dateTool.format('d-MMM-yyyy',$op.getDateAvailable(),$locale)				
+							</li>
+						#end
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					Please allow a few extra days for the products to be received by us and sent to you.
+				</td>
+			</tr>
+		</table>
+	</body> 
+</html> 
+

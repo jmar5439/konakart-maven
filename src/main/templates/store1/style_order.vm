@@ -1,0 +1,22 @@
+		<style type="text/css">
+		<!-- For double byte characters. Substitute all occurrences of "Arial" with "Arial Unicode MS" and uncomment this section. Remove the comment completely.
+		  	@font-face {  
+              src: url(file:///C:/Windows/Fonts/ARIALUNI.TTF);  
+              -fs-pdf-font-embed: embed;  
+              -fs-pdf-font-encoding: Identity-H;
+             }  
+         -->
+			.main {font-family: Verdana, Arial, sans-serif; font-size: 11px; line-height: 1.5; }
+			.font {font-family: Arial, Helvetica, Sans-Serif;}
+			.title{font-size: 140%;}
+			.title1{font-size: 120%;}
+			.title2{font-size: 100%;}
+			.dataCell { font-family: Arial, Helvetica, Sans-Serif; background-color: #E1E7F7 }
+			.option{font-size: 80%;}
+			.dataTableHeadingRow { background-color: #E1E7F7 }
+			.dataTableHeadingContent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: bold; }
+			.dataTableRow { background-color: #F0F1F1; }
+			.dataTableRowSelected { background-color: #DEE4E8; }
+			.dataTableRowOver { background-color: #FFFFFF; cursor: pointer; cursor: hand; }
+			.dataTableContent { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; }
+		</style>

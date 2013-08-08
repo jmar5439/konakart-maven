@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<title>Order Details</title>
+#include("${templateBase}/style_order.vm")
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="${imageBaseUrl}/logo.png" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					 $storeName - Packing List
+				</td>
+			</tr>
+		</table>
+    		
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+			<colgroup>
+				<col width="20%"></col>
+				<col width="80%"></col>
+			</colgroup>		    		
+         	<tr>
+            	<td colspan="2"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+          	</tr>
+ 			<tr>
+				<td class="main"><b>Order Number:</b></td>
+				<td class="main">$order.getId()</td>
+			</tr>
+			<tr>
+				<td class="main"><b>Date Ordered:</b></td>
+				<td class="main">$dateTool.format('d-MMM-yyyy HH:mm:ss',$order.getDatePurchased(),$locale)</td>
+			</tr>
+         </table>
+         
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+          <tr>
+            <td colspan="3"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+          </tr>
+          <tr>
+            <td valign="top">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+              		<tr>
+                		<td class="main" valign="top"><b>Customer:</b></td>
+                		<td class="main">$order.getCustomerFormattedAddress()</td>
+              		</tr>
+              		<tr>
+	               		<td colspan="2"><img src="${imageBaseUrl}/pixel_trans.gif" border="0" alt="" width="1" height="5"></td>
+              		</tr>
+            	</table>
+            </td>
+            <td valign="top">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+              	<tr>
+                	<td class="main" valign="top"><b>Shipping Address:</b></td>
+                	<td class="main">$order.getDeliveryFormattedAddress()</td>
+              	</tr>
+            	</table>
+            </td>
+            <td valign="top">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+              	<tr>
+                	<td class="main" valign="top"><b>Billing Address:</b></td>
+                	<td class="main">$order.getBillingFormattedAddress()</td>
+              	</tr>
+            	</table>
+            </td>
+          </tr>
+        </table>
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="2">
+			<colgroup span="2">
+				<col width="20%"></col>
+				<col width="80%"></col>
+			</colgroup>		
+          <tr>
+          	<td class="main"><b>Telephone Number:</b></td>
+            <td class="main">$order.getCustomerTelephone()</td>
+          </tr>
+          <tr>
+          	<td class="main"><b>E-Mail Address:</b></td>
+            <td class="main"><a href="$order.getCustomerEmail()"><u>$order.getCustomerEmail()</u></a></td>
+          </tr>
+          <tr>
+          	<td class="main"><b>Payment Method:</b></td>
+            <td class="main">$order.getPaymentMethod()</td>
+          </tr>
+          <tr>
+            <td colspan="3"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+          </tr>
+        </table>
+
+		<table border="0" width="100%" cellspacing="0" cellpadding="2">
+          <tr class="dataTableHeadingRow">
+            <td class="dataTableHeadingContent" colspan="2">Products</td>
+            <td class="dataTableHeadingContent">Model</td>
+          </tr>
+			#foreach( $op in $order.getOrderProducts() )
+				<tr>
+            	<td class="dataTableContent" valign="top" align="right">$op.getQuantity()&nbsp;x</td>
+            	<td class="dataTableContent" valign="top">$esc.html($op.getName())
+				#foreach( $option in $op.getOpts() )
+					#if ( $option.getType() == 1 )
+						<br/><nobr><small>&nbsp;<i>-$option.getName(): $option.getQuantity() $option.getValue()</i></small></nobr>
+    				#else
+						<br/><nobr><small>&nbsp;<i>-$option.getName(): $option.getValue()</i></small></nobr>
+    				#end
+				#end
+				</td>
+            	<td class="dataTableContent" valign="top">$op.getModel()</td>
+            	</tr>
+          	#end
+          <tr>
+            <td colspan="3"><img src="${imageBaseUrl}/pixel_black.gif" border="0" alt="" width="100%" height="1"></td>
+          </tr>
+		</table>
+	</body> 
+</html>

@@ -1,0 +1,47 @@
+Your request has not been approved
+<html>
+	<head>
+		<title>KonaKart Customer Group Change</title>
+		<style type="text/css">							
+			.font {font-family: Arial, Helvetica, Sans-Serif;}
+			.title{font-size: 160%;}		
+			.dataCell { font-family: Arial, Helvetica, Sans-Serif; background-color: #E1E7F7 }
+			.title1{font-size: 120%;}		
+			.option{font-size: 80%;}		
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="http://www.konakart.com/images/logo.png" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					 Request to become a wholesale customer
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Dear $cust.getFirstName() $cust.getLastName(),
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					We are sorry to inform you that your request to become a wholesale customer has not been approved. The reason for this is as follows:
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					$obj1
+				</td>
+			</tr>
+			</tr>
+		</table>
+	</body> 
+</html> 
+

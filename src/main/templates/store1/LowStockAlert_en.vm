@@ -1,0 +1,36 @@
+Low stock level alert !
+<html>
+	<head>
+		<title>Low Stock Level Alert</title>
+		<style type="text/css">
+			.font {font-family: Arial, Helvetica, Sans-Serif;}
+			.title{font-size: 160%;}
+			.dataCell { font-family: Arial, Helvetica, Sans-Serif; background-color: #E1E7F7 }
+			.title1{font-size: 120%;}
+			.option{font-size: 80%;}
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="${imageBaseUrl}/logo.png" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					 Low Stock Level Alert
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%">
+					The stock level of $productName (id = $productId, SKU = $sku) has fallen to $productQuantity.
+				</td>
+			</tr>
+		</table>
+	</body> 
+</html> 
+
