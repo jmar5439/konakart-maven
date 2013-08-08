@@ -330,5 +330,10 @@
 	<artifactId>wsdl4j</artifactId>
 	<version>1.5.1</version>
 </dependency>
+ <dependency>
+<groupId>werken-xpath</groupId>
+<artifactId>werken-xpath</artifactId>
+<version>0.9.4</version>
+</dependency>
   </dependencies>
 </project>
