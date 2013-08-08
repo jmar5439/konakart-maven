@@ -325,5 +325,10 @@
      	<artifactId>validation-api</artifactId>
      	<version>1.0.0.GA</version>
      </dependency>
+     <dependency>
+	<groupId>wsdl4j</groupId>
+	<artifactId>wsdl4j</artifactId>
+	<version>1.5.1</version>
+</dependency>
   </dependencies>
 </project>
