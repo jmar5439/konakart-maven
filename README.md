@@ -1,4 +1,4 @@
 konakart-maven
 ==============
 
-Konakart Maven directory layout 
+Konakart Maven style directory layout 
