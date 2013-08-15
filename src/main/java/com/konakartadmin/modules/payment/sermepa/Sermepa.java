@@ -55,7 +55,7 @@ public class Sermepa extends PaymentModule
      */
     public String getImplementationFileName()
     {
-        return "Worldpay";
+        return "Sermepa";
     }
 
     /**
@@ -63,7 +63,7 @@ public class Sermepa extends PaymentModule
      */
     public String getModuleCode()
     {
-        return "worldpay";
+        return "sermepa";
     }
 
     /**
