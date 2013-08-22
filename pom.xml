@@ -83,7 +83,7 @@
    </dependency>
    <dependency>
      <groupId>com.konakart</groupId>
-     <artifactId>konakart</artifactId>
+     <artifactId>konakart-app</artifactId>
      <version>6.5.0.1</version>
      <scope>system</scope>
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_app.jar</systemPath>
