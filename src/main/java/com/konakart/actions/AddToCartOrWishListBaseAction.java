@@ -31,6 +31,7 @@ import com.konakart.appif.OptionIf;
 import com.konakart.appif.ProductIf;
 import com.konakart.appif.WishListIf;
 import com.konakart.appif.WishListItemIf;
+import com.konakart.actions.BaseAction;
 
 /**
  * Base Action for add to cart or add to wish list actions

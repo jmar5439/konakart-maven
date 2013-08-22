@@ -23,14 +23,64 @@
       </resource>
     </resources>
     <plugins>
+    	<!-- plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+         <encoding>utf8</encoding>
+          <source>1.6</source>
+          <target>1.6</target>
+          <failOnError>true</failOnError>
+          <verbose>true</verbose>
+       </configuration>
+      </plugin-->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
+        <encoding>utf8</encoding>
           <source>1.6</source>
           <target>1.6</target>
+          <failOnError>true</failOnError>
+          <verbose>true</verbose>
         </configuration>
       </plugin>
+      <plugin>
+      <artifactId>maven-jar-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>jar-server</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <classifier>classes</classifier>
+                                </configuration>
+                            </execution>
+                        </executions>
+     </plugin>
+       <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.3.1</version>
+                    <executions>                        
+                        <execution>
+                            <id>install test</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>install-file</goal>
+                            </goals>
+
+                            <configuration>
+                                <file>${project.build.directory}\${project.build.finalName}-classes.jar</file>
+                                <pomFile>${basedir}\pom.xml</pomFile>
+                                <classifier>classes</classifier>
+                            </configuration>
+                        </execution>
+                    </executions>                   
+                </plugin>
+      
     </plugins>
   </build>
   <dependencies>
@@ -39,6 +89,46 @@
   		<artifactId>xml-apis</artifactId>
   		<version>2.0.2</version>
   	</dependency-->
+  	<dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart</artifactId>
+     <version>6.5.0.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart.jar</systemPath>
+   </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart</artifactId>
+     <version>6.5.0.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_app.jar</systemPath>
+   </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart-torque</artifactId>
+     <version>6.5.0.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_torque-3.3.jar</systemPath>
+   </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart-utils</artifactId>
+     <version>6.5.0.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_utils.jar</systemPath>
+   </dependency>
+   <dependency>
+     	<groupId>javax.mail</groupId>
+     	<artifactId>mail</artifactId>
+     	<version>1.4.1</version>
+     </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart-utils</artifactId>
+     <version>6.5.0.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_village-3.3.jar</systemPath>
+   </dependency>
   	<dependency>
   		<groupId>org.apache.struts</groupId>
   		<artifactId>struts2-core</artifactId>
@@ -229,11 +319,13 @@
     	<groupId>org.slf4j</groupId>
     	<artifactId>slf4j-log4j12</artifactId>
     	<version>1.5.11</version>
+    	<scope>provided</scope>
     </dependency>
     <dependency>
     	<groupId>org.slf4j</groupId>
     	<artifactId>slf4j-api</artifactId>
     	<version>1.5.11</version>
+    	<scope>provided</scope>
     </dependency>
     <dependency>
     	<groupId>org.apache.tiles</groupId>
