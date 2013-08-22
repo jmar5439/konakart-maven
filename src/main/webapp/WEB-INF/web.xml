@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<web-app id="WebApp_KonaKartAdmin"
-         xmlns="http://java.sun.com/xml/ns/j2ee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-         version="2.4">
-	<display-name>KonaKart Admin App</display-name>
-
-	<description>
-		KonaKart Admin Application - includes the AXIS server
-	</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KonaKart web.xml file. (c) 2006 DS Data Systems UK Ltd, All rights reserved. -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	id="WebApp_KonaKart" version="2.4">
+	<display-name>KonaKart Store-Front Application</display-name>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>tilesDefinitions</param-name>
+		<param-value>/WEB-INF/tiles.xml</param-value>
+	</context-param>
 
 	<listener>
 		<listener-class>
@@ -17,13 +27,182 @@
 		</listener-class>
 	</listener>
 
+	<!-- Used to listen out for Shutdown messages and handle the Shutdown of threads -->
+	<listener>
+		<listener-class>
+			com.konakart.bl.KKServletContextListener
+		</listener-class>
+	</listener>
+	
+	<!-- Start a KKAppEngine -->
 	<servlet>
-		<servlet-name>AxisServlet</servlet-name>
-		<servlet-class>
-			org.apache.axis.transport.http.AxisServlet
-		</servlet-class>
-		<load-on-startup>10</load-on-startup>
+		<description>KonaKart Client Engine Servlet</description>
+		<servlet-name>KonaKartAppEngineServlet</servlet-name>
+		<servlet-class>com.konakart.servlet.AppEngServlet</servlet-class>
+		<init-param>
+			<param-name>propertiesPath</param-name>
+			<param-value>konakart.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>appPropertiesPath</param-name>
+			<param-value>konakart_app.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mode</param-name>
+			<param-value>0</param-value>
+		</init-param>
+		<init-param>
+			<param-name>storeId</param-name>
+			<param-value>store1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>customersShared</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>productsShared</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>categoriesShared</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>defaultStoreId</param-name>
+			<param-value>store1</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	
+	<!-- Servlet for Apache Message Queue
+
+	Uncomment this if you want to use the Apache MQ
+		
+	ApacheMQ Server parameters:
+		uri                 = The broker URI
+		mqEnabled           = Enable (true) or Disable (false) the Apache Message Queue
+		mqName              = A name for this Broker to make it unique
+		mqAdminUserName     = admin username
+		mqAdminUserPassword = admin password
+		mqUserUserName      = username
+		mqUserPassword      = password
+		mqKonaKartQStub     = users are authorised to use Queue Names starting with this prefix
+			
+	-->
+	
+	<!-- Apache ActiveMQ 
+	<servlet>
+		<servlet-name>KonaKartMQServlet</servlet-name>
+		<servlet-class>
+			com.konakart.mq.KKMQServer
+		</servlet-class>
+		<init-param>
+			<param-name>uri</param-name>
+			<param-value>tcp://localhost:8791</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqName</param-name>
+			<param-value>KonaKart.Broker.1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqAdminUserName</param-name>
+			<param-value>kkadmin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqAdminUserPassword</param-name>
+			<param-value>princess</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqUserUserName</param-name>
+			<param-value>kkuser</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqUserPassword</param-name>
+			<param-value>prince</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mqKonaKartQStub</param-name>
+			<param-value>KonaKart.</param-value>
+		</init-param>
+		<load-on-startup>20</load-on-startup>
+	</servlet>
+	End of Apache ActiveMQ -->
+
+	<!-- Servlet for JSON Engine
+
+	Uncomment the section below if you want to use the JSON Engine
+		
+	JSON Server parameters:
+		jsonEnabled         = Enable (true) or Disable (false) the JSON server
+		excludedInterfaces  = Comma separated list of KKEngIf interfaces that
+		                      are not allowed.  If not specified or left empty, 
+		                      no interfaces are excluded.
+		includedInterfaces  = Comma separated list of KKEngIf interfaces that
+		                      are allowed. If not specified or left empty, all
+		                      interfaces are allowed.
+	-->
+	
+	<!-- JSON Server
+	<servlet>
+		<servlet-name>KonaKart_JSON_Servlet</servlet-name>
+		<servlet-class>
+			com.konakart.json.KKJSONServer
+		</servlet-class>
+		<init-param>
+			<param-name>jsonEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>includedInterfaces</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>excludedInterfaces</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>30</load-on-startup>
+	</servlet>
+	End of JSON Server -->
+
+	<!-- Servlet for JSON Admin
+
+	Uncomment the section below if you want to use the JSON Admin Servlet
+
+	When sending these commands the password must match the one defined in the 
+	"password" servlet parameter below.
+	
+	Only enable the JSON Admin server if you need to and if you do, change the 
+	password.
+
+	JSON Admin commands:
+		?cmd=enableJSON&pwd=password
+		    Enables the JSON server
+		?cmd=disableJSON&pwd=password
+		    Disables the JSON server
+		?cmd=excludeInterfaces&pwd=password&Interfaces=Comma separated list of KKEngIf interfaces
+		    Sets the excludedInterfaces
+		?cmd=includeInterfaces&pwd=password&Interfaces=Comma separated list of KKEngIf interfaces
+		    Sets the includedInterfaces
+	-->
+	
+	<!-- JSON Admin
+	<servlet>
+		<servlet-name>KonaKart_JSON_Admin</servlet-name>
+		<servlet-class>
+			com.konakart.json.KKJSONServerAdmin
+		</servlet-class>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>jason</param-value>
+		</init-param>
+		<load-on-startup>29</load-on-startup>
+	</servlet>
+	End of JSON Admin -->
 
 	<!-- Servlet for RMI Server
 
@@ -32,14 +211,13 @@
 		RMI Server parameters:
 			port       = The port number where the RMI registry will listen
 			rmiEnabled = Enable (true) or Disable (false) the RMI interface
-
 	-->
-	
-	<!-- RMI Server 
+
+	<!-- RMI Server
 	<servlet>
-		<servlet-name>KonakartAdminRMIServlet</servlet-name>
+		<servlet-name>KonakartRMIServlet</servlet-name>
 		<servlet-class>
-			com.konakartadmin.rmi.KKRMIAdminServer
+			com.konakart.rmi.KKRMIServer
 		</servlet-class>
 		<init-param>
 			<param-name>port</param-name>
@@ -52,111 +230,15 @@
 		<load-on-startup>20</load-on-startup>
 	</servlet>
 	End of RMI Server -->
-	
-	<servlet>
-		<servlet-name>KonaKartAdminServlet</servlet-name>
-		<servlet-class>
-			com.konakartadmin.server.KKAdminGWTServiceImpl
-		</servlet-class>
-		<init-param>
-			<param-name>defaultStoreId</param-name>
-			<param-value>store1</param-value>
-		</init-param>
-		<load-on-startup>30</load-on-startup>
-	</servlet>
-
-	<!-- Quartz Scheduler 
-	<servlet>
-		<servlet-name>QuartzInitializer</servlet-name>
-		<servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
-		<init-param>
-			<param-name>shutdown-on-unload</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<load-on-startup>40</load-on-startup>
-	</servlet>
-	End of Quartz Scheduler -->
-	
-	<!-- uncomment this if you want the admin servlet -->
-	<!-- 
-		<servlet>
-		<servlet-name>AdminServlet</servlet-name>
-		<servlet-class>
-			org.apache.axis.transport.http.AdminServlet
-		</servlet-class>
-		<load-on-startup>100</load-on-startup>
-	</servlet>
-	-->
-	
-	<!-- For Diagnostics only -->
-	<!-- 
-		<servlet>
-		<servlet-name>SOAPMonitorService</servlet-name>
-		<servlet-class>
-		org.apache.axis.monitor.SOAPMonitorService
-		</servlet-class>
-		<init-param>
-		<param-name>SOAPMonitorPort</param-name>
-		<param-value>5001</param-value>
-		</init-param>
-		<load-on-startup>100</load-on-startup>
-		</servlet>
-	-->
 
 	<servlet>
-		<servlet-name>FileUpload</servlet-name>
+		<servlet-name>AxisServlet</servlet-name>
 		<servlet-class>
-			com.konakartadmin.servlet.FileUpload
-		</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>DisplayFile</servlet-name>
-		<servlet-class>
-			com.konakartadmin.servlet.DisplayFile
-		</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>Launcher</servlet-name>
-		<servlet-class>
-			com.konakartadmin.servlet.AdminAppLauncher
-		</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>GetPDF</servlet-name>
-		<servlet-class>
-			com.konakartadmin.servlet.GetPdf
+			org.apache.axis.transport.http.AxisServlet
 		</servlet-class>
 	</servlet>
 
 	<!-- Servlet Mapping -->
-
-	<servlet-mapping>
-		<servlet-name>FileUpload</servlet-name>
-		<url-pattern>/uploadAction</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>DisplayFile</servlet-name>
-		<url-pattern>/displayFile</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>Launcher</servlet-name>
-		<url-pattern>/launcher</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>GetPDF</servlet-name>
-		<url-pattern>/getPdf</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>KonaKartAdminServlet</servlet-name>
-		<url-pattern>/konakartadmin</url-pattern>
-	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>AxisServlet</servlet-name>
@@ -168,26 +250,31 @@
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
 
-	<!-- For Diagnostics only -->
-	<!-- 
-	<servlet-mapping>
-		<servlet-name>SOAPMonitorService</servlet-name>
-		<url-pattern>/SOAPMonitor</url-pattern>
-	</servlet-mapping>
+	<!--
+	     Uncomment the section below if you want to use the JSON Engine
 	-->
-	
-	<!-- uncomment this if you want the admin servlet -->
-	<!-- 
+	<!-- JSON Server 
 	<servlet-mapping>
-		<servlet-name>AdminServlet</servlet-name>
-		<url-pattern>/servlet/AdminServlet</url-pattern>
+		<servlet-name>KonaKart_JSON_Servlet</servlet-name>
+		<url-pattern>/konakartjson</url-pattern>
 	</servlet-mapping>
-	-->
+	End of JSON Server -->
 	
-	<!-- currently the W3C havent settled on a media type for WSDL;
-		http://www.w3.org/TR/2003/WD-wsdl12-20030303/#ietf-draft
-		for now we go with the basic 'it's XML' response -->
+	<!--
+	     Uncomment the section below if you want to use the JSON Admin Servlet
+	-->
+	<!-- JSON Admin 
+	<servlet-mapping>
+		<servlet-name>KonaKart_JSON_Admin</servlet-name>
+		<url-pattern>/konakartjsonadmin</url-pattern>
+	</servlet-mapping>
+	End of JSON Admin -->
 
+	<!-- 
+		Currently the W3C haven't settled on a media type for WSDL;
+		http://www.w3.org/TR/2003/WD-wsdl12-20030303/#ietf-draft
+		for now we go with the basic 'it's XML' response 
+	-->
 	<mime-mapping>
 		<extension>wsdl</extension>
 		<mime-type>text/xml</mime-type>
@@ -199,9 +286,7 @@
 	</mime-mapping>
 
 	<!-- Welcome File List -->
-
 	<welcome-file-list>
-		<welcome-file>KonakartAdmin.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-
 </web-app>
