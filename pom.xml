@@ -124,6 +124,13 @@
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_utils.jar</systemPath>
    </dependency>
    <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart-utils</artifactId>
+     <version>6.5.0.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/village-3.3.jar</systemPath>
+   </dependency>
+   <dependency>
      	<groupId>javax.mail</groupId>
      	<artifactId>mail</artifactId>
      	<version>1.4.1</version>
