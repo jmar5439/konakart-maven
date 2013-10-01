@@ -45,8 +45,8 @@ $(function() {
 <div id="footer">
     <div id="contact-info" class="footer-area narrow">
     	KonaStore<br />
-		020 7946 0000<br />
-		<a href ="#">info@konakart.com</a>
+		+34 610 62 71 99<br />
+		<a href ="#">info@alquilerjoven.com</a>
     </div>
    	<div id="newsletter" class="footer-area wide">
    		<kk:msg  key="footer.subscribe"/><br />
