@@ -1,0 +1,132 @@
+Welcome to KonaKart
+<html>
+	<head>
+		<title>Welcome</title>
+#include("${templateBase}/style.vm")
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="${imageBaseUrl}/logo.png" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					 Welcome
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					Dear $customer.getFirstName() $customer.getLastName(),
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					We welcome you to $storeName.
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					You can now take part in the various services we have to offer you. Some of these services include:
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="1" nowrap="true">
+					Permanent Cart
+				</td>
+				<td width="100%"  colspan="1">
+					Any products added to your online cart remain there until you remove them, or check them out.
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="1" nowrap="true">
+					Address Book
+				</td>
+				<td width="100%"  colspan="1">
+					We can now deliver your products to another address other than yours! This is perfect to send birthday gifts direct to the birthday-person themselves.
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="1" nowrap="true">
+					Order History
+				</td>
+				<td width="100%"  colspan="1">
+					View your history of purchases that you have made with us.
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="1" nowrap="true">
+					Products Reviews
+				</td>
+				<td width="100%"  colspan="1">
+					Share your opinions on products with our other customers.
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					For help with any of our online services, please email the store-owner: $storeOwnerEmailAddr.
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					Note: This email address was given to us by one of our customers. If you did not signup to be a member, please send an email to $storeOwnerEmailAddr.
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					Best regards,
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;&nbsp;$storeOwner
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;&nbsp;$storeName
+				</td>
+			</tr>
+		</table>
+	</body> 
+</html> 
+
