@@ -26,16 +26,31 @@
   <build>
     <resources>
       <resource>
+      
         <directory>src/main/java</directory>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
       </resource>
       <resource>
+       <filtering>true</filtering>
         <directory>src/main/resources</directory>
+         <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+           
+        </includes>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
+      </resource>
+       <resource>
+       <filtering>true</filtering>
+        <directory>src/main/templates</directory>
+         <includes>
+          <include>**/*.vm</include>
+         </includes>
+       
       </resource>
     </resources>
     <plugins>
