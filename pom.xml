@@ -4,9 +4,14 @@
   <artifactId>konakart</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+   <name>Konakart Maven</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <scm>  
+    <connection>scm:git:git://github.com/jmar5439/konakart-maven.git/tree/dev</connection>  
+    <developerConnection>scm:git:git://github.com/jmar5439/konakart-maven.gi/tree/dev</developerConnection>  
+  </scm>  
   <description>Konakart e-commerce Mavenized project</description>
   <developers>
     <developer>
