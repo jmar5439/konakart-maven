@@ -539,6 +539,13 @@
      <scope>system</scope>
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/saaj.jar</systemPath>
    </dependency>
+   <dependency>
+     <groupId>net.taxcloud</groupId>
+     <artifactId>fedtax-api</artifactId>
+     <version>1.0</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/FedTaxApi.jar</systemPath>
+   </dependency>
     <dependency>
 	<groupId>stratum</groupId>
 	<artifactId>stratum</artifactId>
