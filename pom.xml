@@ -547,15 +547,18 @@
      <scope>system</scope>
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/FedTaxApi.jar</systemPath>
    </dependency>
+   
     <dependency>
 	<groupId>stratum</groupId>
 	<artifactId>stratum</artifactId>
 	<version>1.0-b3</version>
+	 </dependency>
+	 
 	<dependency>
    		<groupId>avalon-logkit</groupId>
    		<artifactId>avalon-logkit</artifactId>
    		<version>2.1</version>
    	</dependency>
-</dependency>
+
   </dependencies>
 </project>
