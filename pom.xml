@@ -561,6 +561,13 @@
      <scope>system</scope>
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_authorizenet.jar</systemPath>
    </dependency>
+   <dependency>
+     <groupId>com.fedex.rate</groupId>
+     <artifactId>fedex-rate</artifactId>
+     <version>1.0</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_fedex.jar</systemPath>
+   </dependency>
    
     <dependency>
 	<groupId>stratum</groupId>
