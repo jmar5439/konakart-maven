@@ -11,6 +11,7 @@
   <scm>  
     <connection>scm:git:git://github.com/jmar5439/konakart-maven.git/tree/dev</connection>  
     <developerConnection>scm:git:git://github.com/jmar5439/konakart-maven.gi/tree/dev</developerConnection>  
+   	<url>https://github.com/jmar5439/konakart-maven</url>
   </scm>  
   <description>Konakart e-commerce Mavenized project</description>
   <developers>
