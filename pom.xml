@@ -136,7 +136,7 @@
                     <deployables>
                         <deployable>
                             <groupId>com.boutiq</groupId>
-                            <artifactId>konakartadmin</artifactId>
+                            <artifactId>konakart</artifactId>
                             <type>war</type>
                             <properties>
                         		<context></context>
