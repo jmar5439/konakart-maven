@@ -468,5 +468,81 @@
 	<artifactId>avalon-framework-api</artifactId>
 	<version>4.3.1</version>
 </dependency>
+ <dependency>
+     <groupId>org.apache.oro</groupId>
+     <artifactId>jakarta-oro</artifactId>
+     <version>1.0</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/jakarta-oro.jar</systemPath>
+   </dependency>
+   <dependency>
+     <groupId>javax.xml</groupId>
+     <artifactId>jaxrpc</artifactId>
+     <version>1.0</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/jaxrpc.jar</systemPath>
+   </dependency>
+ <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakart</artifactId>
+     <version>6.5.1.0-9307</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart.jar</systemPath>
+   </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakar-app</artifactId>
+     <version>6.5.1.0-9307</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_app.jar</systemPath>
+   </dependency>
+      
+   <dependency>
+     <groupId>javax.naming</groupId>
+     <artifactId>jndi</artifactId>
+     <version>1.2.1</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/jndi-1.2.1.jar</systemPath>
+   </dependency>
+       <dependency>
+     <groupId>net.sourceforge.jtds</groupId>
+     <artifactId>jtds</artifactId>
+     <version>1.2.5</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/jtds-1.2.5.jar</systemPath>
+   </dependency>
+    <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakar-utils</artifactId>
+     <version>6.5.1.0-9307</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_utils.jar</systemPath>
+   </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakar-village</artifactId>
+     <version>3.3</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_village-3.3.jar</systemPath>
+   </dependency>
+    <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakar-torke</artifactId>
+     <version>3.3</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_torque-3.3.jar</systemPath>
+   </dependency>
+    <dependency>
+     <groupId>javax.xml.soap</groupId>
+     <artifactId>saaj</artifactId>
+     <version>1.0</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/saaj.jar</systemPath>
+   </dependency>
+    <dependency>
+	<groupId>stratum</groupId>
+	<artifactId>stratum</artifactId>
+	<version>1.0-b3</version>
+</dependency>
   </dependencies>
 </project>
