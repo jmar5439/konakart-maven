@@ -554,6 +554,13 @@
      <scope>system</scope>
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/FedTaxApi.jar</systemPath>
    </dependency>
+   <dependency>
+     <groupId>com.anet</groupId>
+     <artifactId>anet-api</artifactId>
+     <version>1.0</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_authorizenet.jar</systemPath>
+   </dependency>
    
     <dependency>
 	<groupId>stratum</groupId>
