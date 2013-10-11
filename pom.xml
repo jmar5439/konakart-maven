@@ -497,6 +497,13 @@
      <scope>system</scope>
      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakart_app.jar</systemPath>
    </dependency>
+   <dependency>
+     <groupId>com.konakart</groupId>
+     <artifactId>konakar-admin</artifactId>
+     <version>6.5.1.0-9307</version>
+     <scope>system</scope>
+     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/konakartadmin.jar</systemPath>
+   </dependency>
       
    <dependency>
      <groupId>javax.naming</groupId>
