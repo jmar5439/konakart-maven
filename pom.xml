@@ -139,7 +139,7 @@
                             <artifactId>konakart</artifactId>
                             <type>war</type>
                             <properties>
-                        		<context></context>
+                        		<context>konakart</context>
                         		</properties>
                         </deployable>
                     </deployables>
