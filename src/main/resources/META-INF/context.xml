@@ -1,4 +1,4 @@
-<Context path="" reloadable="false" docBase="konakart.war" unloadDelay="10000">
+<Context path="konakart" reloadable="false" docBase="konakart.war" unloadDelay="10000">
    
     
 </Context>
