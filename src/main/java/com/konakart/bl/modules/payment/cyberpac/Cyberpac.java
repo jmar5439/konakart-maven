@@ -496,10 +496,10 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
 	       for(int i = 0; i < SHA1_DIGEST_LENGTH; i++)
 	        {         
 	         h = hash[i];          // Convertir de byte a int
-	         if(h < 0) h += 256;  // Si son valores negativos, pueden haber problemas de conversión.
+	         if(h < 0) h += 256;  // Si son valores negativos, pueden haber problemas de conversiÃ³n.
 	         s = Integer.toHexString(h); // Devuelve el valor hexadecimal como un String        
-	         if (s.length() < 2) hexEncodedDigest= hexEncodedDigest.concat("0"); // Añade un 0 si es necesario
-	         hexEncodedDigest = hexEncodedDigest.concat(s); // Añade la conversión a la cadena ya existente
+	         if (s.length() < 2) hexEncodedDigest= hexEncodedDigest.concat("0"); // AÃ±ade un 0 si es necesario
+	         hexEncodedDigest = hexEncodedDigest.concat(s); // AÃ±ade la conversiÃ³n a la cadena ya existente
 	        }
 
 	       	hexEncodedDigest = hexEncodedDigest.toUpperCase(); // Convierte la cadena generada a Mayusculas.
