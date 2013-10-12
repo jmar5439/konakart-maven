@@ -332,8 +332,9 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
             throw new KKException("An Order Total was not found in the order id = " + order.getId());
         }
         
-        String ds_Merchant_Amount = (total.multiply(new BigDecimal(100))).toString();
-        parmList.add(new NameValue("Ds_Merchant_Amount", total.toString()));
+        BigDecimal importDecimal=total.multiply(new BigDecimal(100));
+        String ds_Merchant_Amount =Integer.toString(importDecimal.intValue());
+        parmList.add(new NameValue("Ds_Merchant_Amount", ds_Merchant_Amount));
 
         // Currency
         String currCode = null;
@@ -356,16 +357,21 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
         }
         String ds_Merchant_Currency = currCode;
         parmList.add(new NameValue("Ds_Merchant_Currency", ds_Merchant_Currency));
+        
+        parmList.add(new NameValue("Ds_Merchant_MerchantName", "BOUTIQUE"));
 
         // Various
-        String ds_Merchant_Order = Integer.toString(order.getId());
+        //String ds_Merchant_Order = Integer.toString(order.getId());
+        String ds_Merchant_Order=getReference();
         parmList.add(new NameValue("Ds_Merchant_Order", ds_Merchant_Order));
         parmList.add(new NameValue("Ds_Merchant_ProductDescription", rb
                 .getString(MODULE_PAYMENT_CYBERPAC_CUSTOMER_MSG) + " " + order.getId()));
         parmList.add(new NameValue("Ds_Merchant_Cardholder", order.getBillingName()));
         String ds_Merchant_MerchantCode = sd.getMerchantCode();
         parmList.add(new NameValue("Ds_Merchant_MerchantCode", ds_Merchant_MerchantCode));
-        parmList.add(new NameValue("Ds_Merchant_MerchantURL", sd.getCallbackUrl()));
+        
+        String ds_Merchant_MerchantURL=sd.getCallbackUrl();
+        parmList.add(new NameValue("Ds_Merchant_MerchantURL", ds_Merchant_MerchantURL));
         if (sd.getRedirectKOUrl() != null && sd.getRedirectKOUrl().length() > 0)
         {
             parmList.add(new NameValue("Ds_Merchant_UrlKO", sd.getRedirectKOUrl()));
@@ -405,12 +411,16 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
         parmList.add(new NameValue("Ds_Merchant_ConsumerLanguage", lang));
 
         parmList.add(new NameValue("Ds_Merchant_Terminal", sd.getTerminalNumber()));
+        
+        String ds_Merchant_TransactionType="";
 
         if (sd.getTransactionType() != null && sd.getTransactionType().length() > 0)
         {
+        	ds_Merchant_TransactionType=sd.getTransactionType();
             parmList.add(new NameValue("Ds_Merchant_TransactionType", sd.getTransactionType()));
         } else
         {
+        	ds_Merchant_TransactionType="2";
             parmList.add(new NameValue("Ds_Merchant_TransactionType", "2"));
         }
 
@@ -433,10 +443,72 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
         // + DS_Merchant_Currency + SECRET CODE)
        
         String stringToSign = ds_Merchant_Amount + ds_Merchant_Order + ds_Merchant_MerchantCode
-                + ds_Merchant_Currency + sd.getSecretSigningCode();
-        MessageDigest md = MessageDigest.getInstance("SHA-1");
-        byte[] digest = md.digest(stringToSign.getBytes("UTF8"));
-        String hexEncodedDigest = (Hex.encodeHex(digest)).toString();
+              + ds_Merchant_Currency + sd.getSecretSigningCode();
+        String ds_Merchant_Password=sd.getSecretSigningCode();
+        
+        
+        
+        int SHA1_DIGEST_LENGTH = 20;
+		 
+		
+		  
+		 //String Merchant_Name       = value.getDs_Merchant_MerchantName();
+		 String Merchant_Code       = 	ds_Merchant_MerchantCode;
+		 //int    Merchant_Terminal   = value.getMerchant_Terminal();
+		 String Merchant_Order      =		ds_Merchant_Order;
+		
+		 String Merchant_Amount     =  		ds_Merchant_Amount;
+		 String Merchant_Currency   = 		ds_Merchant_Currency;
+		 String Merchant_TransactionType   = ds_Merchant_TransactionType;
+		
+		 
+		 
+		  byte bAmount[]   = new byte[Merchant_Amount.length()];  
+	       byte bOrder[]    = new byte[Merchant_Order.length()];  
+	       byte bCode[]     = new byte[Merchant_Code.length()];  
+	       byte bCurrency[] = new byte[Merchant_Currency.length()];
+	       byte bTransactionType[] = new byte[Merchant_TransactionType.length()];  
+	       byte bMerchantURL[] = new byte[ds_Merchant_MerchantURL.length()];  
+	       byte bPassword[] = new byte[ds_Merchant_Password.length()];   
+	 
+	       bAmount   			= ds_Merchant_Amount.getBytes();
+	       bOrder    			= ds_Merchant_Order.getBytes();
+	       bCode     			= ds_Merchant_MerchantCode.getBytes();
+	       bCurrency 			= ds_Merchant_Currency.getBytes();
+	       bTransactionType 	= sd.getTransactionType().getBytes();
+	       bMerchantURL			= ds_Merchant_MerchantURL.getBytes();
+	       bPassword 			= ds_Merchant_Password.getBytes();
+
+	       MessageDigest sha = MessageDigest.getInstance("SHA-1");
+	       sha.update(bAmount);
+	       sha.update(bOrder);
+	       sha.update(bCode); 
+	       sha.update(bCurrency);
+	       sha.update(bTransactionType);
+	       sha.update(bMerchantURL);
+	       byte[] hash = sha.digest(bPassword);
+	 
+	       String hexEncodedDigest = new String();
+	 
+	       int h = 0;
+	       String s = new String();
+	              
+	       for(int i = 0; i < SHA1_DIGEST_LENGTH; i++)
+	        {         
+	         h = hash[i];          // Convertir de byte a int
+	         if(h < 0) h += 256;  // Si son valores negativos, pueden haber problemas de conversión.
+	         s = Integer.toHexString(h); // Devuelve el valor hexadecimal como un String        
+	         if (s.length() < 2) hexEncodedDigest= hexEncodedDigest.concat("0"); // Añade un 0 si es necesario
+	         hexEncodedDigest = hexEncodedDigest.concat(s); // Añade la conversión a la cadena ya existente
+	        }
+
+	       	hexEncodedDigest = hexEncodedDigest.toUpperCase(); // Convierte la cadena generada a Mayusculas.
+		
+			  //String stringToSign=Merchant_Signature;
+        
+        //MessageDigest md = MessageDigest.getInstance("SHA-1");
+        //byte[] digest = md.digest(stringToSign.getBytes("UTF8"));
+        //String hexEncodedDigest2 = (Hex.encodeHex(digest)).toString();
         parmList.add(new NameValue("Ds_Merchant_MerchantSignature", hexEncodedDigest));
         if (log.isDebugEnabled())
         {
@@ -708,5 +780,20 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
             this.secretSigningCode = secretSigningCode;
         }
     }
+    public static  String getReference() {
+    	
+    	//Long referencia_long = System.currentTimeMillis();
+    	 
+    	 //String referencia=Long.toString(referencia_long);
+    	 //System.out.println(referencia);
+    	//referencia = referencia.substring(0, 11);
+    		
+    		 java.text.SimpleDateFormat formador = new java.text.SimpleDateFormat("yyMMddHHmmss");
+    		
+    		String time=formador.format(new java.util.Date());
+    	
+    	String referencia = time;
+    	return referencia;
+    	}
 
 }
