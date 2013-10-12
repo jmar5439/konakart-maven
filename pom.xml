@@ -88,7 +88,7 @@
     <artifactId>maven-war-plugin</artifactId>
     <version>2.2</version>
     <configuration>
-     <warName>konakart.war</warName>
+     <warName>konakart</warName>
     </configuration>
 	</plugin>
 	<plugin>
@@ -155,7 +155,7 @@
                     <id>start-container</id>
                     <phase>pre-integration-test</phase>
                     <goals>
-                     	<goal>deployer-undeploy</goal>
+                     	<!-- goal>deployer-undeploy</goal-->
                         <goal>deployer-deploy</goal>
                     </goals>
                 </execution>
