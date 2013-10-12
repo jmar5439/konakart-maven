@@ -331,6 +331,8 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
         {
             throw new KKException("An Order Total was not found in the order id = " + order.getId());
         }
+        
+        String ds_Merchant_Amount = (total.multiply(new BigDecimal(100))).toString();
         parmList.add(new NameValue("Ds_Merchant_Amount", total.toString()));
 
         // Currency
@@ -429,7 +431,7 @@ public class Cyberpac extends BasePaymentModule implements PaymentInterface
         // Sign the data
         // Digest=SHA-1(Ds_Merchant_Amount + Ds_Merchant_Order +Ds_Merchant_MerchantCode
         // + DS_Merchant_Currency + SECRET CODE)
-        String ds_Merchant_Amount = (total.multiply(new BigDecimal(100))).toString();
+       
         String stringToSign = ds_Merchant_Amount + ds_Merchant_Order + ds_Merchant_MerchantCode
                 + ds_Merchant_Currency + sd.getSecretSigningCode();
         MessageDigest md = MessageDigest.getInstance("SHA-1");
