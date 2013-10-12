@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<title>Order Confirmation</title>
+		<style type="text/css">
+			.font {font-family: Arial, Helvetica, Sans-Serif;}
+			.title{font-size: 160%;}
+			.dataCell { font-family: Arial, Helvetica, Sans-Serif; background-color: #E1E7F7 }
+			.title1{font-size: 120%;}
+			.option{font-size: 80%;}
+		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<table border="0" width="100%" class="font">
+			<tr>
+				<td class="title">
+					<a href="http://www.konakart.com">
+						<img src="http://www.konakart.com/images/kk_logo.jpg" border="0" alt="KonaKart v${KonaKartVersion}"/>
+					</a>
+				</td>
+				<td class="title">
+					 Order Confirmation
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					$storeName
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					Order Number: $order.getId()
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					Date Ordered: $dateTool.format('d-MMM-yyyy HH:mm:ss',$order.getDatePurchased(),$locale)
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Products
+				</td>
+			</tr>
+			#foreach( $op in $order.getOrderProducts() )
+			<tr>
+				<td  colspan="1" nowrap="true">
+					$op.getQuantity() x $op.getName()
+				</td>
+				<td width="100%"  colspan="1">
+					$currencyMgr.formatPrice($op.getFinalPriceIncTax(),$order.getCurrencyCode())
+				</td>
+			</tr>
+				#foreach( $option in $op.getOpts() )
+				<tr>
+					<td width="100%"  colspan="2" class="option">
+						#if ( $option.getType() == 1 )
+							&nbsp;&nbsp;-$option.getName() : $option.getQuantity() $option.getValue()
+	    				#else
+							&nbsp;&nbsp;-$option.getName() : $option.getValue()
+	    				#end
+					</td>
+				</tr>
+				#end
+			#end	
+		</table>	
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Totals
+				</td>
+			</tr>
+			#foreach( $ot in $order.getOrderTotals() )
+			<tr>
+				<td  colspan="1" nowrap="true">
+					$ot.getTitle()
+				</td>
+				<td width="100%"  colspan="1">
+					$ot.getText()
+				</td>
+			</tr>
+			#end
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Delivery Address
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					$order.getDeliveryFormattedAddress()
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Billing Address
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					$order.getBillingFormattedAddress()
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Payment Method
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					$order.getPaymentMethod()
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="100%" class="dataCell">
+			<tr>
+				<td width="100%"  colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2" class="title1">
+					Order History
+				</td>
+			</tr>
+			#foreach( $osh in $order.getStatusTrail() )
+			<tr>
+				<td width="100%"  colspan="2">
+					$dateTool.format('d-MMM-yyyy HH:mm:ss',$osh.getDateAdded(),$locale) : $osh.getOrderStatus()
+				</td>
+			</tr>
+			<tr>
+				<td width="100%"  colspan="2">
+					$osh.getComments()
+				</td>
+			</tr>
+			#end
+		</table>
+	</body> 
+</html> 
+
