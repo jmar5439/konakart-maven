@@ -489,6 +489,7 @@
 		<action name="MoneyBookersCallback" class="com.konakart.actions.ipn.MoneyBookersAction"/>
 		<action name="PayPalCallback" class="com.konakart.actions.ipn.PayPalAction"/>
 		<action name="WorldPayCallback" class="com.konakart.actions.ipn.WorldPayAction"/>
+		<action name="CyberpacCallback" class="com.konakart.actions.ipn.CyberpacAction"/>
 		
 		<!-- =========================================== Gateway Pre-Processing -->
 		<action name="WorldPayXMLRedirect" class="com.konakart.actions.gateways.WorldPayXMLRedirectAction">
