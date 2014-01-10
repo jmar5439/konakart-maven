@@ -8,6 +8,8 @@ Konakart release  6.5.1.0
 
 How to run 
 ----------
+
+create profiles.xml with
 ```xml
  <profilesXml
 xmlns="http://maven.apache.org/PROFILES/1.0.0"
