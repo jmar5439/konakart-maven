@@ -23,8 +23,8 @@ xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.o
         </property>
       </activation>
       <properties>
-        <mail_server>mail.alquilerjoven.com</mail_server>
-        <mail_port>25</mail_port>
+        <mail_server>...smtp mail server</mail_server>
+        <mail_port>...smtp mail port...</mail_port>
         <connection.url> connection url</connection.url>
 		<connection.username>connection username</connection.username>
 		<connection.password>connection password</connection.password>
