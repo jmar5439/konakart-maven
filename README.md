@@ -10,6 +10,8 @@ How to run
 ----------
 
 
+Database
 
+http://www.konakart.com/docs/manualInstallation.html
 
 [Jordi Martí](https://twitter.com/alquilerjoven)
